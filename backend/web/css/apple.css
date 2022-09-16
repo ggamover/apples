@@ -1,0 +1,6 @@
+.apple{
+    width: 32px;
+    height: 32px;
+    background: url("../icon/004-apple.png");
+    background-size: cover;
+}
