@@ -22,9 +22,13 @@
 }
 
 .apple-menu .list-group-item{
-    width: 220px;
     font-size: 75%;
 }
+
+.ground .apple-menu .list-group-item{
+    width: 220px;
+}
+
 .apple-menu input[type="number"]{
     display: inline-block;
     width: 50px;

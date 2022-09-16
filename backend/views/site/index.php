@@ -18,7 +18,9 @@ $this->title = 'Тестовая задача PR Holding';
         <?php foreach ($list as $apple): ?>
           <div class="apple-box col-md-1 col-3 mb-3">
             <div class="apple<?= $apple->isFallen ? ' fallen' : '' ?>" style="background-color: <?= $apple->color ?>;">
-                <?php if(!$apple->isFallen):?>
+                <?php if($apple->isFallen):?>
+                  <span class="arrow-down">⇩</span>
+                <?php else: ?>
                   <div class="list-group apple-menu">
                     <div class="list-group-item">
                       <a href="<?= Url::to(['apple/drop', 'id' => $apple->id]) ?>">Сорвать</a>
