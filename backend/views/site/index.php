@@ -7,12 +7,10 @@ use yii\widgets\ActiveForm;
 /**
  * @var yii\web\View $this
  *
- * @var \yii\data\ActiveDataProvider $dp
  * @var \backend\models\Apple[] $list
 */
 
 $this->title = 'Тестовая задача PR Holding';
-$list = $dp->models;
 ?>
 <div class="scene">
   <div class="tree container">

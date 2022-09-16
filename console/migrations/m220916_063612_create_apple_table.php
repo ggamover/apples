@@ -19,7 +19,6 @@ class m220916_063612_create_apple_table extends Migration
                 ->defaultExpression("FROM_UNIXTIME(UNIX_TIMESTAMP('2022-01-01 01:00:00') "
                     . " + FLOOR(RAND() * TIMESTAMPDIFF(SECOND,'2022-01-01 00:00:00', NOW())))"),
             'fallen' => $this->dateTime()->comment('Дата падения'),
-            'status' => $this->tinyInteger()->notNull()->defaultValue(1)->comment('Состояние'),
             'consumed' => $this->tinyInteger()->notNull()->defaultValue(0)->comment('Сколько съели'),
         ]);
     }

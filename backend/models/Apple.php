@@ -12,7 +12,6 @@ use backend\lib\Util;
  * @property string $color Цвет
  * @property string $created
  * @property string|null $fallen Дата падения
- * @property int $status Состояние
  * @property int $consumed Сколько съели
  *
  * @property bool $isRotten
@@ -40,7 +39,7 @@ class Apple extends \yii\db\ActiveRecord
         return [
             [['color'], 'required'],
             [['created', 'fallen'], 'safe'],
-            [['status', 'consumed'], 'integer'],
+            [['consumed'], 'integer'],
             [['color'], 'string', 'max' => 7],
         ];
     }
@@ -98,9 +97,6 @@ class Apple extends \yii\db\ActiveRecord
     {
         if($this->isFallen && !$this->isRotten && is_numeric($portion)){
             $this->consumed = min(100, $this->consumed + round($portion));
-            if($this->consumed == 100){
-                $this->status = self::STATUS_OFF;
-            }
         }
         return $this;
     }

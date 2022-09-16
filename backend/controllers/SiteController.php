@@ -64,9 +64,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Apple::find()->where(['status' => Apple::STATUS_ON]);
-        $dp = new ActiveDataProvider(compact('query'));
-        return $this->render('index', compact('dp'));
+        $list = Apple::find()->where(['<', 'consumed', 100])->all();
+        return $this->render('index', compact('list'));
     }
 
     /**
