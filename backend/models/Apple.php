@@ -2,8 +2,6 @@
 
 namespace backend\models;
 
-use Yii;
-
 /**
  * This is the model class for table "apple".
  *
@@ -108,5 +106,6 @@ class Apple extends \yii\db\ActiveRecord
     {
         return 100 - $this->consumed;
     }
+
 
 }
