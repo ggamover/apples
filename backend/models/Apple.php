@@ -2,6 +2,9 @@
 
 namespace backend\models;
 
+use backend\lib\Format;
+use backend\lib\Util;
+
 /**
  * This is the model class for table "apple".
  *
@@ -20,7 +23,6 @@ class Apple extends \yii\db\ActiveRecord
 {
     const STATUS_ON = 1;
     const STATUS_OFF = 13;
-    const YMD_HIS = 'Y:m:d H:i:s';
 
     /**
      * {@inheritdoc}
@@ -60,7 +62,7 @@ class Apple extends \yii\db\ActiveRecord
 
     public function drop()
     {
-        $this->fallen = (new \DateTime)->format(self::YMD_HIS);
+        $this->fallen = (Util::getDate())->format(Format::YMD_HIS);
         return $this;
     }
 
@@ -82,9 +84,10 @@ class Apple extends \yii\db\ActiveRecord
     public function getIsRotten()
     {
         if($this->fallen === null) return false;
-        $dto = \DateTime::createFromFormat(self::YMD_HIS, $this->fallen);
-        $now = new \DateTime;
-        return ($dto instanceof \DateTime) && $dto->modify('+5 hours') > $now;
+        $dto = \DateTime::createFromFormat(Format::YMD_HIS, $this->fallen, Util::getTimeZone());
+        $now = Util::getDate();
+        $diff = $dto->diff($now);
+        return ($diff instanceof \DateInterval) && ($diff->days || $diff->h >= 5);
     }
 
     /**
@@ -93,8 +96,8 @@ class Apple extends \yii\db\ActiveRecord
      */
     public function bite($portion)
     {
-        if($this->isFallen() && !$this->isRotten() && is_numeric($portion)){
-            $this->consumed = max(100, $this->consumed + round($portion));
+        if($this->isFallen && !$this->isRotten && is_numeric($portion)){
+            $this->consumed = min(100, $this->consumed + round($portion));
             if($this->consumed == 100){
                 $this->status = self::STATUS_OFF;
             }
@@ -106,6 +109,5 @@ class Apple extends \yii\db\ActiveRecord
     {
         return 100 - $this->consumed;
     }
-
 
 }

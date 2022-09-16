@@ -42,4 +42,17 @@ class AppleController extends Controller
         }
         $this->redirect(['site/index']);
     }
+
+    public function actionDrop($id)
+    {
+        $apple = Apple::findOne($id);
+        $apple->drop()->save();
+        $this->redirect(['site/index']);
+    }
+
+    public function actionBite($id, $portion){
+        $apple = Apple::findOne($id);
+        $apple->bite($portion)->save();
+        $this->redirect(['site/index']);
+    }
 }

@@ -3,4 +3,49 @@
     height: 32px;
     background: url("../icon/004-apple.png");
     background-size: cover;
+    position: relative;
+}
+.apple.fallen{
+    background-color: rgba(230,230,230, 0.65) !important;
+}
+.apple .cross{ visibility: hidden; }
+.apple.rotten .cross{ visibility: visible; }
+.apple-menu{
+    display: none;
+    position: absolute;
+    z-index: 101;
+    top: 32px;
+}
+.apple-box:hover .apple-menu,
+.apple-box.selected .apple-menu{
+    display: block;
+}
+
+.apple-menu .list-group-item{
+    width: 220px;
+    font-size: 75%;
+}
+.apple-menu input[type="number"]{
+    display: inline-block;
+    width: 50px;
+    font-size: 10px;
+    padding: 2px;
+}
+
+.scene{
+    height: 90vh;
+    position: relative;
+}
+.tree,.ground{
+    position: absolute;
+}
+.tree{
+    height: 60%;
+}
+
+.ground{
+    min-height: 64px;
+    bottom: 64px;
+    border-top: 3px dashed #ccc;
+    padding-top: 15px;
 }
